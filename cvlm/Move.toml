@@ -1,13 +1,13 @@
 [package]
 name = "cvlm"
-edition = "2024.beta"
+edition = "2024"
 license = "Apache 2.0"
 version = "0.0.1"
 published-at = "0x436572746f7261"
 
 [dependencies]
-MoveStdlib = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/move-stdlib", rev = "framework/testnet" }
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+MoveStdlib = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/move-stdlib", rev = "develop" }
+#Iota = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/iota-framework", rev = "develop" }
 
 [addresses]
 cvlm = "0x436572746f7261"
