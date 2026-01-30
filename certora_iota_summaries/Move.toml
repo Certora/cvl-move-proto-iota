@@ -1,0 +1,15 @@
+[package]
+name = "certora_iota_summaries"
+edition = "2024"
+license = "Apache 2.0"
+version = "0.0.1"
+published-at = "0x436572746f726101"
+
+[dependencies]
+MoveStdlib = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/move-stdlib", rev = "develop" }
+Iota = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/iota-framework", rev = "develop" }
+IotaSystem = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/iota-system", rev = "develop" }
+cvlm = { local = "../cvlm" }
+
+[addresses]
+certora = "0x436572746f726101"

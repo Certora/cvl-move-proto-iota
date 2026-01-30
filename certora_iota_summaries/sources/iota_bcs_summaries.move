@@ -1,7 +1,7 @@
 #[allow(unused_function)]
-module certora::sui_bcs_summaries;
+module certora::iota_bcs_summaries;
 
-use sui::bcs::BCS;
+use iota::bcs::BCS;
 
 use cvlm::nondet::nondet;
 use cvlm::manifest::{ summary, shadow, ghost };
@@ -12,12 +12,12 @@ fun cvlm_manifest() {
     ghost(b"peel_size_map");
     ghost(b"peel_value_map");
     ghost(b"peel_remainder_map");
-    summary(b"new", @sui, b"bcs", b"new");
-    summary(b"into_remainder_bytes", @sui, b"bcs", b"into_remainder_bytes");
-    summary(b"peel_u8", @sui, b"bcs", b"peel_u8");
-    summary(b"peel_vec_u8", @sui, b"bcs", b"peel_vec_u8");
-    summary(b"peel_vec_u64", @sui, b"bcs", b"peel_vec_u64");
-    summary(b"peel_vec_vec_u8", @sui, b"bcs", b"peel_vec_vec_u8");
+    summary(b"new", @iota, b"bcs", b"new");
+    summary(b"into_remainder_bytes", @iota, b"bcs", b"into_remainder_bytes");
+    summary(b"peel_u8", @iota, b"bcs", b"peel_u8");
+    summary(b"peel_vec_u8", @iota, b"bcs", b"peel_vec_u8");
+    summary(b"peel_vec_u64", @iota, b"bcs", b"peel_vec_u64");
+    summary(b"peel_vec_vec_u8", @iota, b"bcs", b"peel_vec_vec_u8");
 }
 
 // Replace the BCS struct with a simple vector, holding the remaining bytes to be deserialized.  Unlike the Sui BCS

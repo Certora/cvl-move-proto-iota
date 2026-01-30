@@ -23,8 +23,8 @@ module cvlm::manifest;
         // Declare that the function `transfer` in this module is a rule.
         rule(b"transfer");
 
-        // Declare that the function `get_idx_summary` in this module summarizes `sui::vec_map::get_idx`.
-        summary(b"get_idx_summary", @sui, b"vec_map", b"get_idx");
+        // Declare that the function `get_idx_summary` in this module summarizes `iota::vec_map::get_idx`.
+        summary(b"get_idx_summary", @iota, b"vec_map", b"get_idx");
 
         // Declare that the function `hashToValue` in this module is a ghost mapping.
         ghost(b"hashToValue");
@@ -114,7 +114,7 @@ public native fun hash(function_name: vector<u8>);
 /// Consider the following example:
 /// 
 /// ```move
-///     use sui::vec_map::VecMap;
+///     use iota::vec_map::VecMap;
 ///     fun cvlm_manifest() {
 ///         cvlm::manifest::shadow(b"vec_map_shadow");
 ///     }

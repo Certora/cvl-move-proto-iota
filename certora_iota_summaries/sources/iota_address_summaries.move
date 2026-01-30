@@ -1,20 +1,20 @@
 #[allow(unused_function)]
-module certora::sui_address_summaries;
+module certora::iota_address_summaries;
 
 use cvlm::manifest::summary;
 use cvlm::conversions::u256_to_address;
 
 fun cvlm_manifest() {
-    summary(b"from_u256", @sui, b"address", b"from_u256");
-    summary(b"from_bytes", @sui, b"address", b"from_bytes");
+    summary(b"from_u256", @iota, b"address", b"from_u256");
+    summary(b"from_bytes", @iota, b"address", b"from_bytes");
 }
 
-// #[summary(sui::address::from_u256)]
+// #[summary(iota::address::from_u256)]
 fun from_u256(n: u256): address { 
     u256_to_address(n) 
 }
 
-// #[summary(sui::address::from_bytes)]
+// #[summary(iota::address::from_bytes)]
 fun from_bytes(bytes: vector<u8>): address {
     assert!(bytes.length() == 32);
     let mut n = 0u256;
