@@ -18,6 +18,7 @@ fun cvlm_manifest() {
     summary(b"peel_vec_u8", @iota, b"bcs", b"peel_vec_u8");
     summary(b"peel_vec_u64", @iota, b"bcs", b"peel_vec_u64");
     summary(b"peel_vec_vec_u8", @iota, b"bcs", b"peel_vec_vec_u8");
+    summary(b"peel_address", @iota, b"bcs", b"peel_address");
 }
 
 // Replace the BCS struct with a simple vector, holding the remaining bytes to be deserialized.  Unlike the Sui BCS
@@ -63,3 +64,4 @@ fun peel_u8(bcs: &mut BCS): u8 { peel(bcs) }
 fun peel_vec_u8(bcs: &mut BCS): vector<u8> { peel(bcs) }
 fun peel_vec_u64(bcs: &mut BCS): vector<u64> { peel(bcs) }
 fun peel_vec_vec_u8(bcs: &mut BCS): vector<vector<u8>> { peel(bcs) }
+fun peel_address(bcs: &mut BCS): address { peel(bcs) }
