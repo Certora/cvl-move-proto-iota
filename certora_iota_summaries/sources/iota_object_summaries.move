@@ -18,7 +18,7 @@ fun cvlm_manifest() {
 public native fun deleted(id: address): &mut bool;
 
 // #[field_access(id), summary(iota::object::borrow_uid)]
-native fun borrow_uid<T: key>(obj: &T): &UID;
+public(package) native fun borrow_uid<T: key>(obj: &T): &UID;
 
 // #[ghost]
 native fun is_id(id: address): &mut bool;

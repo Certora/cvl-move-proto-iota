@@ -5,7 +5,7 @@ use cvlm::ghost::{ ghost_read, ghost_write };
 use cvlm::manifest::{ summary, ghost, hash };
 use std::type_name;
 use std::type_name::TypeName;
-use iota::object::id_address;
+use certora::iota_object_summaries::borrow_uid;
 
 fun cvlm_manifest() {
     ghost(b"child_object_value");
@@ -66,14 +66,15 @@ fun borrow_child_object_mut<Child: key>(object: &mut UID, id: address): &mut Chi
 
 // #[summary(iota::dynamic_field::add_child_object)]
 fun add_child_object<Child: key>(parent: address, child: Child) {
-    let id = id_address(&child);
+    let uid = borrow_uid(&child);
+    let id = uid.to_address();
     assert!(!has_child_object(parent, id));
     *child_object_type(parent, id) = type_name::get<Child>();
+    add_child_object_hook(uid);
     ghost_write(child_object_value(parent, id), child);
-    add_child_object_hook(&child);
 }
 
-fun add_child_object_hook<Child: key>(child: &Child) {
+fun add_child_object_hook(_child_id: &UID) {
     /*
         This function is called each time a child object is added to a parent.  Specs can summarize this function to add
         assumptions about the child object.  This is useful for expressing that the child object does not itself have
@@ -94,7 +95,7 @@ fun add_child_object_hook<Child: key>(child: &Child) {
             summary(b"add_child_object_hook", @certora_iota_summaries, b"iota_dynamic_field_summaries", b"add_child_object_hook");
         }
 
-        fun add_child_object_hook<Child: key>(child: &Child, child_id: &UID) {            
+        fun add_child_object_hook(child_id: &UID) {            
             cvlm_assume_msg(!dynamic_field::exists_(child_id, SomeChildName()));
             cvlm_assume_msg(!dynamic_field::exists_(child_id, SomeOtherChildName()));
         }

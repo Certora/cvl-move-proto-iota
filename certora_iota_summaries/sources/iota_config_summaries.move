@@ -1,3 +1,4 @@
+#[allow(unused_function)]
 module certora::iota_config_summaries;
 
 use cvlm::manifest::{ summary, ghost };
