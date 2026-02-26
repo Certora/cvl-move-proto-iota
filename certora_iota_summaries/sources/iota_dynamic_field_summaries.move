@@ -70,6 +70,35 @@ fun add_child_object<Child: key>(parent: address, child: Child) {
     assert!(!has_child_object(parent, id));
     *child_object_type(parent, id) = type_name::get<Child>();
     ghost_write(child_object_value(parent, id), child);
+    add_child_object_hook(&child);
+}
+
+fun add_child_object_hook<Child: key>(child: &Child) {
+    /*
+        This function is called each time a child object is added to a parent.  Specs can summarize this function to add
+        assumptions about the child object.  This is useful for expressing that the child object does not itself have
+        any child objects yet, by enumerating the possible types of child objects it does not have.
+
+        (This is because we don't have quantified expressions, so we can't express "for all child names, there is no
+        child object with that name".)
+
+        For example:
+
+        ```
+
+        use iota::{ object, dynamic_field };
+        use cvlm::manifest::summary;
+        use cvlm::asserts::cvlm_assume_msg;
+
+        fun cvlm_manifest() {
+            summary(b"add_child_object_hook", @certora_iota_summaries, b"iota_dynamic_field_summaries", b"add_child_object_hook");
+        }
+
+        fun add_child_object_hook<Child: key>(child: &Child, child_id: &UID) {            
+            cvlm_assume_msg(!dynamic_field::exists_(child_id, SomeChildName()));
+            cvlm_assume_msg(!dynamic_field::exists_(child_id, SomeOtherChildName()));
+        }
+     */
 }
 
 // #[summary(iota::dynamic_field::remove_child_object)]
