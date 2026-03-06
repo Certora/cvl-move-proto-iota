@@ -28,6 +28,10 @@ public fun record_new_uid(id: address) {
     let is_id = is_id(id);
     cvlm_assume_msg(!*is_id, b"id is newly allocated");
     *is_id = true;
+    cvlm_assume_msg(
+        certora::iota_dynamic_field_summaries::has_no_child_objects(id), 
+        b"Newly allocated id has no child objects"
+    );
 }
 
 // #[summary(iota::object::delete_impl)]

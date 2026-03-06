@@ -3,6 +3,7 @@ module certora::iota_dynamic_field_summaries;
 
 use cvlm::ghost::{ ghost_read, ghost_write };
 use cvlm::manifest::{ summary, ghost, hash };
+use cvlm::quantified_expressions::for_all_1;
 use std::type_name;
 use std::type_name::TypeName;
 use iota::object::id_address;
@@ -77,4 +78,9 @@ fun remove_child_object<Child: key>(parent: address, id: address): Child {
     assert!(has_child_object_with_ty<Child>(parent, id));
     *child_object_type(parent, id) = type_name::get<NotPresent>();
     ghost_read(child_object_value(parent, id))
+}
+
+public(package) fun has_no_child_objects(parent: address): bool {
+    let not_present_type = type_name::get<NotPresent>();
+    for_all_1!(|id: address| child_object_type(parent, id) == not_present_type)
 }
