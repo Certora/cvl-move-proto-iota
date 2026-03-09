@@ -10,4 +10,4 @@ fun cvlm_manifest() {
     ghost(b"try_string");
 }
 
-public native fun try_string(_: vector<u8>): Option<String>
+public native fun try_string(_: vector<u8>): Option<String>;
